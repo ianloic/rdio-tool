@@ -1,0 +1,19 @@
+rdio-tool.py - a command-line interface to the Rdio API
+
+When you check this out of git the first thing you need to do is
+  git submodule update --init
+to bring in the rdio-python and python-oauth2 dependencies.
+
+State and configuration information is stored in ~/.rdio-tool.json
+
+Before using the tool you must obtain a consumer key and secret from the 
+Rdio developer site. They must be passed into rdio-tool.py the first time 
+you use it with the: --consumer-key=KEY --consumer-secret=SECRET
+arguments. They'll be stored in ~/.rdio-tool.json for subsequent calls.
+
+To authenticate pass the --authenticate option. It'll pop open your browser
+to complete the OAuth process. The credentials will be stored in 
+~/.rdio-tool.json but those credentials can be cleared with --forget-auth
+
+The first non-option parameter is the method name. Subsequent parameters
+are the method arguments in the form name=value.
