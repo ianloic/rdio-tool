@@ -1,6 +1,6 @@
 [submodule "rdio"]
 	path = rdio
-	url = ../rdio-python/
+	url = http://github.com/ianloic/rdio-python.git
 [submodule "python-oauth2"]
 	path = python-oauth2
 	url = http://github.com/simplegeo/python-oauth2.git
