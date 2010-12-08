@@ -45,12 +45,16 @@ if options.authenticate:
   verifier = raw_input('Enter the PIN from the Rdio site: ').strip()
   rdio.complete_authentication(verifier)
 
-method = args.pop(0)
-args = dict([a.split('=',1) for a in args])
-result = rdio.call(method, **args)
-json.dump(result, sys.stdout, indent=True)
-sys.stdout.write('\n')
-
 f = file(config_path, 'w')
 json.dump(config, f, indent=True)
-f.write('\n')
+f.write('\n')  
+
+method = args.pop(0)
+args = dict([a.split('=',1) for a in args])
+response, content = rdio.call_raw(method, **args)
+if response['status'] == '200':
+  print content
+else:
+  if options.verbose:
+    print content
+  sys.exit(int(response['status']))
