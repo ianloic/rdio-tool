@@ -34,7 +34,16 @@ if not config.has_key('consumer_key') or not config.has_key('consumer_secret'):
   sys.stderr.write('Both the consumer key and consumer secret must be specified')
   sys.exit(1)
   
+if options.forget_auth:
+  config['auth_state'] = {}
+  
 rdio = Rdio(config['consumer_key'], config['consumer_secret'], config['auth_state'])
+
+if options.authenticate:
+  import webbrowser
+  webbrowser.open(rdio.begin_authentication('oob'))
+  verifier = raw_input('Enter the PIN from the Rdio site: ').strip()
+  rdio.complete_authentication(verifier)
 
 method = args.pop(0)
 args = dict([a.split('=',1) for a in args])
