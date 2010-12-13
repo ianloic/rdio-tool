@@ -56,5 +56,8 @@ if response['status'] == '200':
   print content
 else:
   if options.verbose:
-    print content
+    if response.has_key('www-authenticate'):
+      print 'Authentication required, pass --authenticate'
+    else:
+      print content
   sys.exit(int(response['status']))
