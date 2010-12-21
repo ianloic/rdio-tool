@@ -34,7 +34,7 @@ if not config.has_key('consumer_key') or not config.has_key('consumer_secret'):
   sys.stderr.write('Both the consumer key and consumer secret must be specified')
   sys.exit(1)
   
-if options.forget_auth:
+if options.forget_auth or options.authenticate:
   config['auth_state'] = {}
   
 rdio = Rdio(config['consumer_key'], config['consumer_secret'], config['auth_state'])
